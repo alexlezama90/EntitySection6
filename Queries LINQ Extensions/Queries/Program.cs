@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Queries
@@ -160,6 +161,22 @@ namespace Queries
             //var avg =context.Courses.Average(c => c.FullPrice);
             //Console.WriteLine(avg);
             #endregion
+
+            #region Deferred Execution & IQueryable Explained
+            //IQueryable recibes expresions that are not executed untill the IQueryable collection will be iterated
+            //IEnumerable collections expect a func or delegate, and will be executed inmediately
+
+            //var courses = context.Courses;
+            //IQueryable<Course> courses = context.Courses; //IQueryable is more efficient cause it allows to extend queries (It wont execute the query until iterated)
+            //IEnumerable<Course> courses = context.Courses;  //IEnumerable will load ALL the courses and then we will filter the collection
+            //var filtered = courses.Where(c => c.Level == 1);
+            //foreach(var course in filtered)
+            //{
+            //    Console.WriteLine(course.Name);
+            //}
+            #endregion
+
+
         }
     }
 }
