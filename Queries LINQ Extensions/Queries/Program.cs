@@ -9,6 +9,7 @@ namespace Queries
         {
             var context = new PlutoContext();
 
+            #region LINQ Extension Methods
             ////Restriction
             //var courses = context.Courses.Where(c => c.Level == 1);
 
@@ -117,17 +118,48 @@ namespace Queries
             //}
 
             //CrossJoin
-            var crossResults = context.Authors.SelectMany(a => context.Courses,
-                (author, course) => new
-                {
-                    Author = author,
-                    Course = course
-                });
+            //var crossResults = context.Authors.SelectMany(a => context.Courses,
+            //    (author, course) => new
+            //    {
+            //        Author = author,
+            //        Course = course
+            //    });
 
-            Console.WriteLine(crossResults.Count());
-            foreach (var cross in crossResults)
-                Console.WriteLine("{0} {1}", cross.Author.Name, cross.Course.Name);
+            //Console.WriteLine(crossResults.Count());
+            //foreach (var cross in crossResults)
+            //    Console.WriteLine("{0} {1}", cross.Author.Name, cross.Course.Name);
+            #endregion
 
+            #region Additional Methods
+            ////Partitioning
+            //var coursesPage2= context.Courses.OrderBy(c=>c.Name).Skip(3).Take(10);
+            //Console.WriteLine(coursesPage2.Count());
+
+            ////Element Operators
+            //var course = context.Courses.OrderBy(c => c.Level).First(); //If the table is empty we're going to get an exception
+            //context.Courses.OrderBy(c => c.Level).FirstOrDefault(); //If the table is empty we're going to get null
+            //context.Courses.OrderBy(c => c.Level).FirstOrDefault(c => c.FullPrice > 100); //We can give it conditions
+
+            //context.Courses.Last();
+            //context.Courses.LastOrDefault();
+
+            //var course = context.Courses.Single(c => c.Id == 1);              //If the condition we supply in the Single or the SingleOrDefault 
+            //var course = context.Courses.SingleOrDefault(c => c.Id == 1);     //Methods it will give an Exception
+
+            ////Quantifying
+            //var areALLAbove10Dollars = context.Courses.All(c => c.FullPrice > 10);
+            //var isThereANYCourseOfLevel1= context.Courses.Any(c => c.Level == 1);
+
+            //Aggregating
+            //var count = context.Courses.Count();
+            ////var count = context.Courses.Where(c=>c.Level==1).Count();   //context.Courses.Count(c=>c.Level ==1);
+            //var max = context.Courses.Max(c => c.FullPrice); //context.Courses.Where(c=>c.Level==2).Max(c=>c.FullPrice);
+            //Console.WriteLine(max);
+            //var min = context.Courses.Min(c => c.FullPrice);
+            //Console.WriteLine(min);
+            //var avg =context.Courses.Average(c => c.FullPrice);
+            //Console.WriteLine(avg);
+            #endregion
         }
     }
 }
